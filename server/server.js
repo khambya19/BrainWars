@@ -79,7 +79,7 @@ socketHandler(io)
 async function start() {
   await connectDB()
   server.listen(env.PORT, () => {
-    console.log(`Server running on port ${env.PORT}`)
+    console.log(`[BrainWars] Server started on port ${env.PORT}`)
   })
 }
 
