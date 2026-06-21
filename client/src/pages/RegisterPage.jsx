@@ -2,15 +2,14 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import AuthLayout from '../components/AuthLayout.jsx'
 import SignupForm from '../components/SignupForm.jsx'
-import { useAuth } from '../context/AuthContext.jsx'
 
 export default function RegisterPage() {
   const navigate = useNavigate()
-  const { login } = useAuth()
 
   function handleSuccess(payload) {
-    login(payload.token, payload.player)
-    navigate('/dashboard')
+    navigate('/login', {
+      state: { justRegistered: true, email: payload?.player?.email ?? '' },
+    })
   }
 
   return (

@@ -3,6 +3,8 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const Player = require('../models/Player')
 const authenticate = require('../middleware/authenticate')
+const { isValidEmail } = require('../utils/validators')
+const { buildPlayerPayload } = require('../utils/playerUtils')
 
 const router = express.Router()
 
@@ -16,9 +18,6 @@ function createToken(player) {
   return jwt.sign({ playerId: player._id }, getJwtSecret(), { expiresIn: '7d' })
 }
 
-function buildPlayerPayload(player) {
-  return { id: player._id, name: player.name, email: player.email }
-}
 
 
 function validateSignupBody({ name, email, password }) {
@@ -28,8 +27,7 @@ function validateSignupBody({ name, email, password }) {
   if (typeof name !== 'string' || name.trim().length < 2 || name.trim().length > 60) {
     return 'Name must be between 2 and 60 characters.'
   }
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  if (!emailRegex.test(email)) {
+  if (!isValidEmail(email)) {
     return 'Enter a valid email address.'
   }
   if (typeof password !== 'string' || password.length < 8) {
@@ -118,8 +116,7 @@ router.post('/forgot-password', async (request, response) => {
       return response.status(400).json({ message: 'Email is required.' })
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(email)) {
+    if (!isValidEmail(email)) {
       return response.status(400).json({ message: 'Enter a valid email address.' })
     }
 

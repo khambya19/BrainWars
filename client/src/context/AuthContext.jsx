@@ -18,9 +18,13 @@ export function AuthProvider({ children }) {
     }
 
     apiFetch('/api/auth/me')
-      .then((r) => r.json())
-      .then((data) => {
-        setPlayer(data)
+      .then((r) => {
+        if (!r.ok) {
+          clearSession()
+          setPlayer(null)
+          return
+        }
+        return r.json().then((data) => setPlayer(data))
       })
       .catch(() => {
         clearSession()

@@ -4,6 +4,7 @@ import { z } from 'zod'
 import Button from './Button.jsx'
 import Input from './Input.jsx'
 import { parseResponse } from '../utils/api.js'
+import { useFormValidation } from '../hooks/useFormValidation.js'
 
 const schema = z
   .object({
@@ -57,19 +58,7 @@ export default function SignupForm({ onSuccess }) {
   const [loading, setLoading] = useState(false)
   const [serverError, setServerError] = useState('')
 
-  const result = schema.safeParse(values)
-  const fieldErrors = result.success
-    ? {}
-    : Object.fromEntries(
-        result.error.issues.map((e) => [e.path[0], e.message])
-      )
-
-  function getFieldState(field) {
-    if (!touched[field] || !values[field]) return {}
-    return fieldErrors[field]
-      ? { error: fieldErrors[field] }
-      : { success: true }
-  }
+  const { isValid, getFieldState } = useFormValidation(schema, values, touched)
 
   function handleChange(field, value) {
     setValues((prev) => ({ ...prev, [field]: value }))
@@ -84,7 +73,7 @@ export default function SignupForm({ onSuccess }) {
     event.preventDefault()
     setTouched({ name: true, email: true, password: true, confirmPassword: true })
 
-    if (!result.success) return
+    if (!isValid) return
 
     setLoading(true)
     setServerError('')

@@ -8,6 +8,8 @@ const helmet = require('helmet')
 const rateLimit = require('express-rate-limit')
 const connectDB = require('./config/db')
 const authRoutes = require('./routes/authRoutes')
+const bankRoutes = require('./routes/bankRoutes')
+const roomRoutes = require('./routes/roomRoutes')
 
 const app = express()
 
@@ -30,10 +32,20 @@ const authLimiter = rateLimit({
 
 connectDB()
 
-app.use('/api/auth', authLimiter, authRoutes)
+app.use('/api/auth',  authLimiter, authRoutes)
+app.use('/api/banks', bankRoutes)
+app.use('/api/rooms', roomRoutes)
 
 app.get('/', (_req, res) => {
   res.json({ status: 'ok' })
+})
+
+app.get('/api/health', (_req, res) => {
+  const mongoose = require('mongoose')
+  const states = { 0: 'disconnected', 1: 'connected', 2: 'connecting', 3: 'disconnecting' }
+  const dbState = states[mongoose.connection.readyState] ?? 'unknown'
+  const ok = mongoose.connection.readyState === 1
+  res.status(ok ? 200 : 503).json({ status: ok ? 'ok' : 'degraded', db: dbState })
 })
 
 app.get('/api/stats', (_req, res) => {
@@ -49,12 +61,11 @@ app.get('/api/stats', (_req, res) => {
 const server = http.createServer(app)
 
 const io = new Server(server, {
-  cors: { origin: process.env.ALLOWED_ORIGIN },
+  cors: { origin: process.env.ALLOWED_ORIGIN, credentials: true },
 })
 
-io.on('connection', (socket) => {
-  socket.on('disconnect', () => {})
-})
+const socketHandler = require('./sockets/socketHandler')
+socketHandler(io)
 
 const PORT = process.env.PORT || 5001
 server.listen(PORT, () => {
