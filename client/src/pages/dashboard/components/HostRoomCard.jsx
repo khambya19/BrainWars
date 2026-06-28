@@ -9,12 +9,12 @@ const options = [
 
 export default function HostRoomCard() {
   return (
-    <div className="animate-fade-in-up rounded-2xl border border-pink-500/15 bg-[#141B2E]/85 p-6" style={{ animationDelay: '280ms' }}>
+    <div className="animate-fade-in-up rounded-2xl border border-pink-500/15 bg-panel/85 p-6 delay-280">
       <div className="mb-4 flex items-start justify-between gap-3">
         <div>
           <div className="mb-1 flex items-center gap-2 text-pink-400">
             <Settings size={16} aria-hidden="true" />
-            <h2 className="font-['Orbitron'] text-[0.95rem] tracking-[-0.03em] text-[#EDEFF5]">
+            <h2 className="font-orbitron text-[0.95rem] tracking-[-0.03em] text-text">
               Host a tournament
             </h2>
           </div>
@@ -27,7 +27,7 @@ export default function HostRoomCard() {
 
       <div className="mb-4 grid grid-cols-2 gap-2">
         {options.map((opt) => (
-          <div key={opt.label} className="rounded-xl border border-pink-500/10 bg-[#0B0F1A]/50 px-3 py-2.5">
+          <div key={opt.label} className="rounded-xl border border-pink-500/10 bg-void/50 px-3 py-2.5">
             <p className="text-[0.65rem] uppercase tracking-widest text-slate-500">{opt.label}</p>
             <p className="mt-0.5 text-sm text-slate-400">{opt.value}</p>
           </div>

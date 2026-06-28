@@ -1,5 +1,6 @@
-import { BookOpen, LayoutDashboard, Settings, Swords, Trophy, User } from 'lucide-react'
+import { BookOpen, LayoutDashboard, Swords, Trophy, User, Volume2, VolumeX } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
+import { useMute } from '../../../hooks/useMute.js'
 
 const navItems = [
   { label: 'Home',    to: '/dashboard',            icon: LayoutDashboard, end: true },
@@ -10,9 +11,12 @@ const navItems = [
 ]
 
 export default function MobileNav() {
+  const { muted, toggle } = useMute()
+  const MuteIcon = muted ? VolumeX : Volume2
+
   return (
     <nav
-      className="fixed bottom-0 left-0 right-0 z-30 border-t border-pink-500/12 bg-[#0d1220]/95 backdrop-blur-md lg:hidden"
+      className="fixed bottom-0 left-0 right-0 z-30 border-t border-pink-500/12 bg-sidebar/95 backdrop-blur-md lg:hidden"
       aria-label="Mobile navigation"
     >
       <ul className="flex">
@@ -32,6 +36,19 @@ export default function MobileNav() {
             </NavLink>
           </li>
         ))}
+
+        {/* Mute toggle */}
+        <li className="flex-1">
+          <button
+            type="button"
+            onClick={toggle}
+            aria-label={muted ? 'Unmute sounds' : 'Mute sounds'}
+            className="flex w-full flex-col items-center gap-1 py-3 text-[0.6rem] font-medium uppercase tracking-wider text-slate-500 transition duration-150 hover:text-slate-300"
+          >
+            <MuteIcon size={20} aria-hidden="true" />
+            {muted ? 'Muted' : 'Sound'}
+          </button>
+        </li>
       </ul>
     </nav>
   )

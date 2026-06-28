@@ -5,7 +5,10 @@ export const getToken = () => localStorage.getItem(TOKEN_KEY)
 
 export const getPlayer = () => {
   try { return JSON.parse(localStorage.getItem(PLAYER_KEY)) }
-  catch { return null }
+  catch (err) {
+    console.error('[BrainWars/auth] Failed to parse stored player:', err)
+    return null
+  }
 }
 
 export const saveSession = (token, player) => {

@@ -15,6 +15,7 @@ import Home from './pages/Home.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import PrivacyPage from './pages/PrivacyPage.jsx'
 import RegisterPage from './pages/RegisterPage.jsx'
+import ResetPasswordPage from './pages/ResetPasswordPage.jsx'
 import TermsPage from './pages/TermsPage.jsx'
 
 function ProtectedWithSocket() {
@@ -37,6 +38,7 @@ export default function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/terms" element={<TermsPage />} />
+          <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
 
           {/* Protected — dashboard + game share ONE socket instance */}

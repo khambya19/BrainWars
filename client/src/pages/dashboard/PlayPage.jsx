@@ -1,4 +1,4 @@
-import { Globe, Hash, Lock, Plus, RefreshCw, Users } from 'lucide-react'
+import { AlertCircle, Globe, Lock, RefreshCw, Users } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -33,11 +33,12 @@ export default function PlayPage() {
     isPublic:        false,
   })
 
-  const [joinCode, setJoinCode]     = useState('')
-  const [joinError, setJoinError]   = useState('')
-  const [creating, setCreating]     = useState(false)
-  const [joining, setJoining]       = useState(false)
-  const [createError, setCreateError] = useState('')
+  const [joinCode, setJoinCode]         = useState('')
+  const [joinError, setJoinError]       = useState('')
+  const [creating, setCreating]         = useState(false)
+  const [joining, setJoining]           = useState(false)
+  const [createError, setCreateError]   = useState('')
+  const [publicRoomsError, setPublicRoomsError] = useState(null)
 
   useEffect(() => {
     if (tab === 2) fetchPublicRooms()
@@ -51,11 +52,15 @@ export default function PlayPage() {
 
   async function fetchPublicRooms() {
     setLoadingRooms(true)
+    setPublicRoomsError(null)
     try {
       const r    = await apiFetch('/api/rooms/public')
       const data = await r.json()
       setPublicRooms(data)
-    } catch { } finally {
+    } catch (err) {
+      console.error('[BrainWars/PlayPage] Failed to fetch public rooms:', err)
+      setPublicRoomsError('Could not load public rooms.')
+    } finally {
       setLoadingRooms(false)
     }
   }
@@ -118,13 +123,12 @@ export default function PlayPage() {
     <div>
       <div className="animate-fade-in-up mb-8">
         <p className="mb-1 text-xs font-bold uppercase tracking-[0.18em] text-pink-400">Game</p>
-        <h1 className="font-['Orbitron'] text-[clamp(1.8rem,4vw,2.8rem)] leading-none tracking-[-0.04em] text-[#EDEFF5]">
+        <h1 className="font-orbitron text-[clamp(1.8rem,4vw,2.8rem)] leading-none tracking-[-0.04em] text-text">
           Play
         </h1>
       </div>
 
-      {/* Tabs */}
-      <div className="animate-fade-in-up mb-6 flex gap-1 rounded-full border border-pink-500/14 bg-[#141B2E]/60 p-1">
+      <div className="animate-fade-in-up mb-6 flex gap-1 rounded-full border border-pink-500/14 bg-panel/60 p-1">
         {TABS.map((t, i) => (
           <button
             key={t}
@@ -132,8 +136,8 @@ export default function PlayPage() {
             onClick={() => setTab(i)}
             className={`flex-1 rounded-full py-2 text-sm font-medium transition duration-150 ${
               tab === i
-                ? 'border border-pink-500/18 bg-pink-500/12 text-[#EDEFF5]'
-                : 'text-slate-400 hover:text-[#EDEFF5]'
+                ? 'border border-pink-500/18 bg-pink-500/12 text-text'
+                : 'text-slate-400 hover:text-text'
             }`}
           >
             {t}
@@ -141,30 +145,27 @@ export default function PlayPage() {
         ))}
       </div>
 
-      {/* ── CREATE ROOM ── */}
       {tab === 0 && (
         <form onSubmit={handleCreate} className="animate-fade-in grid gap-5">
-          {createError && <p className="text-sm text-[#FF5A4E]">{createError}</p>}
+          {createError && <p className="text-sm text-danger">{createError}</p>}
 
           <div className="grid gap-4 md:grid-cols-2">
-            {/* Room Name */}
             <div className="md:col-span-2">
               <label className="mb-1.5 block text-xs font-bold uppercase tracking-widest text-slate-400">Room Name</label>
               <input
                 value={form.name}
                 onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
                 placeholder="JavaScript Battle"
-                className="min-h-11 w-full rounded-xl border border-pink-500/20 bg-[#141B2E]/85 px-4 text-sm text-[#EDEFF5] outline-none focus:border-pink-500/50 placeholder:text-slate-500"
+                className="min-h-11 w-full rounded-xl border border-pink-500/20 bg-panel/85 px-4 text-sm text-text outline-none focus:border-pink-500/50 placeholder:text-slate-500"
               />
             </div>
 
-            {/* Question Bank */}
             <div>
               <label className="mb-1.5 block text-xs font-bold uppercase tracking-widest text-slate-400">Question Bank</label>
               <select
                 value={form.questionBank}
                 onChange={(e) => setForm((f) => ({ ...f, questionBank: e.target.value }))}
-                className="min-h-11 w-full rounded-xl border border-pink-500/20 bg-[#141B2E]/85 px-4 text-sm text-[#EDEFF5] outline-none focus:border-pink-500/50"
+                className="min-h-11 w-full rounded-xl border border-pink-500/20 bg-panel/85 px-4 text-sm text-text outline-none focus:border-pink-500/50"
               >
                 <option value="">Global pool (all questions)</option>
                 {banks.map((b) => (
@@ -173,7 +174,6 @@ export default function PlayPage() {
               </select>
             </div>
 
-            {/* Difficulty */}
             <div>
               <label className="mb-1.5 block text-xs font-bold uppercase tracking-widest text-slate-400">Difficulty</label>
               <div className="flex gap-2">
@@ -184,8 +184,8 @@ export default function PlayPage() {
                     onClick={() => setForm((f) => ({ ...f, difficulty: d }))}
                     className={`flex-1 rounded-xl border py-2.5 text-xs font-medium transition ${
                       form.difficulty === d
-                        ? 'border-pink-500/40 bg-pink-500/15 text-[#EDEFF5]'
-                        : 'border-pink-500/12 text-slate-400 hover:text-[#EDEFF5]'
+                        ? 'border-pink-500/40 bg-pink-500/15 text-text'
+                        : 'border-pink-500/12 text-slate-400 hover:text-text'
                     }`}
                   >
                     {d}
@@ -194,7 +194,6 @@ export default function PlayPage() {
               </div>
             </div>
 
-            {/* Questions */}
             <div>
               <label className="mb-1.5 block text-xs font-bold uppercase tracking-widest text-slate-400">
                 Questions — {form.questionCount}
@@ -211,7 +210,6 @@ export default function PlayPage() {
               </div>
             </div>
 
-            {/* Time */}
             <div>
               <label className="mb-1.5 block text-xs font-bold uppercase tracking-widest text-slate-400">
                 Time / Question — {form.timePerQuestion}s
@@ -229,7 +227,6 @@ export default function PlayPage() {
             </div>
           </div>
 
-          {/* Categories */}
           <div>
             <label className="mb-2 block text-xs font-bold uppercase tracking-widest text-slate-400">
               Categories {form.categories.length > 0 ? `(${form.categories.length} selected)` : '(all)'}
@@ -242,8 +239,8 @@ export default function PlayPage() {
                   onClick={() => toggleCategory(cat)}
                   className={`rounded-full border px-3 py-1 text-xs transition ${
                     form.categories.includes(cat)
-                      ? 'border-pink-500/40 bg-pink-500/15 text-[#EDEFF5]'
-                      : 'border-pink-500/12 text-slate-400 hover:text-[#EDEFF5]'
+                      ? 'border-pink-500/40 bg-pink-500/15 text-text'
+                      : 'border-pink-500/12 text-slate-400 hover:text-text'
                   }`}
                 >
                   {cat}
@@ -252,7 +249,6 @@ export default function PlayPage() {
             </div>
           </div>
 
-          {/* Visibility */}
           <div className="flex items-center gap-3">
             <button
               type="button"
@@ -261,7 +257,7 @@ export default function PlayPage() {
                 form.isPublic ? 'border-pink-500/40 bg-pink-500/30' : 'border-white/10 bg-white/8'
               }`}
             >
-              <span className={`absolute top-0.5 h-5 w-5 rounded-full bg-[#EDEFF5] shadow transition-all duration-200 ${form.isPublic ? 'left-5' : 'left-0.5'}`} />
+              <span className={`absolute top-0.5 h-5 w-5 rounded-full bg-text shadow transition-all duration-200 ${form.isPublic ? 'left-5' : 'left-0.5'}`} />
             </button>
             <div className="flex items-center gap-2 text-sm text-slate-400">
               {form.isPublic ? <Globe size={14} className="text-lime-400" /> : <Lock size={14} />}
@@ -279,7 +275,6 @@ export default function PlayPage() {
         </form>
       )}
 
-      {/* ── JOIN ROOM ── */}
       {tab === 1 && (
         <form onSubmit={handleJoin} className="animate-fade-in mx-auto max-w-sm">
           <label className="mb-2 block text-center text-xs font-bold uppercase tracking-widest text-slate-400">
@@ -292,9 +287,9 @@ export default function PlayPage() {
             placeholder="AB12"
             autoFocus
             disabled={joining}
-            className="min-h-16 w-full rounded-2xl border border-pink-500/20 bg-[#141B2E]/85 px-4 text-center font-['JetBrains_Mono'] text-3xl uppercase tracking-[0.3em] text-[#EDEFF5] outline-none focus:border-pink-500/50 placeholder:text-slate-600 disabled:opacity-60"
+            className="min-h-16 w-full rounded-2xl border border-pink-500/20 bg-panel/85 px-4 text-center font-data text-3xl uppercase tracking-[0.3em] text-text outline-none focus:border-pink-500/50 placeholder:text-slate-600 disabled:opacity-60"
           />
-          {joinError && <p className="mt-2 text-center text-xs text-[#FF5A4E]">{joinError}</p>}
+          {joinError && <p className="mt-2 text-center text-xs text-danger">{joinError}</p>}
           <button
             type="submit"
             disabled={joining}
@@ -305,7 +300,6 @@ export default function PlayPage() {
         </form>
       )}
 
-      {/* ── PUBLIC ROOMS ── */}
       {tab === 2 && (
         <div className="animate-fade-in">
           <div className="mb-4 flex items-center justify-between">
@@ -317,8 +311,22 @@ export default function PlayPage() {
 
           {loadingRooms ? (
             <p className="text-sm text-slate-500">Loading…</p>
+          ) : publicRoomsError ? (
+            <div className="flex items-center gap-3 rounded-2xl border border-danger/20 bg-danger/5 p-5">
+              <AlertCircle size={18} className="shrink-0 text-danger" />
+              <div>
+                <p className="text-sm font-medium text-danger">{publicRoomsError}</p>
+                <button
+                  type="button"
+                  onClick={fetchPublicRooms}
+                  className="mt-1 text-xs text-slate-400 underline underline-offset-2 transition hover:text-pink-400"
+                >
+                  Try again
+                </button>
+              </div>
+            </div>
           ) : publicRooms.length === 0 ? (
-            <div className="rounded-2xl border border-pink-500/15 bg-[#141B2E]/85 p-10 text-center">
+            <div className="rounded-2xl border border-pink-500/15 bg-panel/85 p-10 text-center">
               <Globe size={28} className="mx-auto mb-3 text-slate-600" />
               <p className="text-sm text-slate-400">No public rooms right now.</p>
               <p className="mt-1 text-xs text-slate-600">Create one and set it to public!</p>
@@ -326,9 +334,9 @@ export default function PlayPage() {
           ) : (
             <div className="grid gap-3">
               {publicRooms.map((room) => (
-                <div key={room.code} className="flex items-center gap-4 rounded-2xl border border-pink-500/15 bg-[#141B2E]/85 p-4">
+                <div key={room.code} className="flex items-center gap-4 rounded-2xl border border-pink-500/15 bg-panel/85 p-4">
                   <div className="min-w-0 flex-1">
-                    <p className="truncate font-medium text-[#EDEFF5]">{room.name}</p>
+                    <p className="truncate font-medium text-text">{room.name}</p>
                     <p className="text-xs text-slate-400">
                       by {room.host} · {room.settings?.difficulty} · {room.settings?.questionCount}q · {room.settings?.timePerQuestion}s
                     </p>
@@ -337,11 +345,11 @@ export default function PlayPage() {
                     <Users size={12} />
                     {room.playerCount}
                   </div>
-                  <div className="font-['JetBrains_Mono'] text-sm tracking-widest text-slate-300">{room.code}</div>
+                  <div className="font-data text-sm tracking-widest text-slate-300">{room.code}</div>
                   <button
                     type="button"
                     onClick={() => { setJoinCode(room.code); setTab(1) }}
-                    className="rounded-xl border border-pink-500/30 bg-pink-500/10 px-3 py-1.5 text-xs font-medium text-[#EDEFF5] transition hover:bg-pink-500/20"
+                    className="rounded-xl border border-pink-500/30 bg-pink-500/10 px-3 py-1.5 text-xs font-medium text-text transition hover:bg-pink-500/20"
                   >
                     Join
                   </button>

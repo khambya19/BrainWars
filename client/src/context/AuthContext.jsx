@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useCallback, useContext, useEffect, useState } from 'react'
 
 import { apiFetch } from '../api/client.js'
 import { clearSession, getToken, saveSession } from '../utils/auth.js'
@@ -26,13 +26,27 @@ export function AuthProvider({ children }) {
         }
         return r.json().then((data) => setPlayer(data))
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error('[BrainWars/AuthContext] Failed to restore session:', err)
         clearSession()
         setPlayer(null)
       })
       .finally(() => {
         setLoading(false)
       })
+  }, [])
+
+  const refreshPlayer = useCallback(async () => {
+    try {
+      const r = await apiFetch('/api/auth/me')
+      if (!r.ok) return null
+      const data = await r.json()
+      setPlayer(data)
+      return data
+    } catch (err) {
+      console.error('[BrainWars/AuthContext] Failed to refresh player:', err)
+      return null
+    }
   }, [])
 
   function login(token, playerData) {
@@ -46,7 +60,7 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ player, loading, login, logout }}>
+    <AuthContext.Provider value={{ player, loading, login, logout, refreshPlayer }}>
       {children}
     </AuthContext.Provider>
   )

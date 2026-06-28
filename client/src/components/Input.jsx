@@ -17,7 +17,7 @@ const Input = forwardRef(function Input(
   const paddingRight = isPassword && hasStatusIcon ? 'pr-16' : 'pr-10'
 
   const borderClass = error
-    ? 'border-[#FF5A4E]/70 focus:border-[#FF5A4E] focus:ring-[#FF5A4E]/15'
+    ? 'border-danger/70 focus:border-danger focus:ring-danger/15'
     : success
       ? 'border-lime-400/70 focus:border-lime-400 focus:ring-lime-400/15'
       : 'border-pink-500/18 focus:border-pink-500/80 focus:ring-pink-500/12'
@@ -33,7 +33,7 @@ const Input = forwardRef(function Input(
             id={inputId}
             type={resolvedType}
             className={[
-              'min-h-12 w-full rounded-2xl border bg-[#0B0F1A]/75 px-4 text-[#EDEFF5] outline-none transition-all duration-200 ease-out placeholder:text-slate-500 focus:ring-4',
+              'min-h-12 w-full rounded-2xl border bg-void/75 px-4 text-text outline-none transition-all duration-200 ease-out placeholder:text-slate-500 focus:ring-4',
               paddingRight,
               borderClass,
             ].join(' ')}
@@ -59,7 +59,7 @@ const Input = forwardRef(function Input(
             {hasStatusIcon ? (
               <span className="transition-all duration-200">
                 {error
-                  ? <X size={16} className="shrink-0 text-[#FF5A4E]" aria-hidden="true" />
+                  ? <X size={16} className="shrink-0 text-danger" aria-hidden="true" />
                   : <Check size={16} className="shrink-0 text-lime-400" aria-hidden="true" />}
               </span>
             ) : null}
@@ -68,7 +68,7 @@ const Input = forwardRef(function Input(
       </div>
 
       {error ? (
-        <span id={errorId} className="text-xs text-[#FF5A4E]" role="alert">
+        <span id={errorId} className="text-xs text-danger" role="alert">
           {error}
         </span>
       ) : null}

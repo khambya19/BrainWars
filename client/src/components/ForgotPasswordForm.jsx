@@ -49,10 +49,10 @@ export default function ForgotPasswordForm({ onBackToLogin }) {
           <Mail size={24} className="text-pink-400" aria-hidden="true" />
         </div>
         <div>
-          <p className="font-bold text-[#EDEFF5]">Check your inbox</p>
+          <p className="font-bold text-text">Check your inbox</p>
           <p className="mt-1 text-sm text-slate-400">
             A reset link was sent to{' '}
-            <span className="text-[#EDEFF5]">{email}</span>.
+            <span className="text-text">{email}</span>.
           </p>
         </div>
         <Button type="button" variant="ghost" onClick={onBackToLogin}>
@@ -80,7 +80,7 @@ export default function ForgotPasswordForm({ onBackToLogin }) {
       />
 
       {error ? (
-        <p className="text-sm text-[#FF5A4E]" role="alert">{error}</p>
+        <p className="text-sm text-danger" role="alert">{error}</p>
       ) : null}
 
       <Button type="submit" variant="primary" className="w-full" disabled={loading}>

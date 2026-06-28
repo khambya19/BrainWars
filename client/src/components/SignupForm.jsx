@@ -46,7 +46,7 @@ function getStrength(password) {
 }
 
 const strengthConfig = {
-  weak:   { bars: 1, color: 'bg-[#FF5A4E]', label: 'Too weak',  text: 'text-[#FF5A4E]' },
+  weak:   { bars: 1, color: 'bg-danger', label: 'Too weak',  text: 'text-danger' },
   fair:   { bars: 2, color: 'bg-amber-400',  label: 'Fair',      text: 'text-amber-400' },
   good:   { bars: 3, color: 'bg-yellow-300', label: 'Good',      text: 'text-yellow-300' },
   strong: { bars: 4, color: 'bg-lime-400',   label: 'Strong',    text: 'text-lime-400' },
@@ -166,7 +166,7 @@ export default function SignupForm({ onSuccess }) {
       />
 
       {serverError ? (
-        <p className="text-sm text-[#FF5A4E]" role="alert">{serverError}</p>
+        <p className="text-sm text-danger" role="alert">{serverError}</p>
       ) : null}
 
       <Button type="submit" variant="primary" className="w-full" disabled={loading}>

@@ -13,7 +13,7 @@ export default function HPBar({ hp = 100 }) {
           style={{ width: `${pct}%`, backgroundColor: color }}
         />
       </div>
-      <span className="font-['JetBrains_Mono'] text-xs" style={{ color }}>{hp}</span>
+      <span className="font-data text-xs" style={{ color }}>{hp}</span>
     </div>
   )
 }

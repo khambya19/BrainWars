@@ -41,7 +41,10 @@ export default function BanksPage() {
     try {
       await apiFetch(`/api/banks/${id}`, { method: 'DELETE' })
       setBanks((prev) => prev.filter((b) => b._id !== id))
-    } catch { }
+    } catch (err) {
+      console.error('[BrainWars/BanksPage] Failed to delete bank:', err)
+      setError('Could not delete bank. Please try again.')
+    }
   }
 
   function triggerUpload(bankId) {
@@ -87,7 +90,7 @@ export default function BanksPage() {
       <div className="animate-fade-in-up mb-8 flex items-start justify-between gap-4">
         <div>
           <p className="mb-1 text-xs font-bold uppercase tracking-[0.18em] text-pink-400">Host</p>
-          <h1 className="font-['Orbitron'] text-[clamp(1.8rem,4vw,2.8rem)] leading-none tracking-[-0.04em] text-[#EDEFF5]">
+          <h1 className="font-orbitron text-[clamp(1.8rem,4vw,2.8rem)] leading-none tracking-[-0.04em] text-text">
             Question Banks
           </h1>
           <p className="mt-2 text-sm text-slate-400">Upload CSV or Excel files to build your question banks.</p>
@@ -95,7 +98,7 @@ export default function BanksPage() {
         <button
           type="button"
           onClick={() => setShowForm((v) => !v)}
-          className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-pink-500/30 bg-pink-500/10 px-4 text-sm font-medium text-[#EDEFF5] transition hover:-translate-y-0.5 hover:bg-pink-500/20"
+          className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-pink-500/30 bg-pink-500/10 px-4 text-sm font-medium text-text transition hover:-translate-y-0.5 hover:bg-pink-500/20"
         >
           <Plus size={15} /> New bank
         </button>
@@ -107,7 +110,7 @@ export default function BanksPage() {
             value={newName}
             onChange={(e) => setNewName(e.target.value)}
             placeholder="Bank name e.g. Programming Quiz"
-            className="min-h-11 flex-1 rounded-xl border border-pink-500/20 bg-[#141B2E]/85 px-4 text-sm text-[#EDEFF5] outline-none focus:border-pink-500/50 placeholder:text-slate-500"
+            className="min-h-11 flex-1 rounded-xl border border-pink-500/20 bg-panel/85 px-4 text-sm text-text outline-none focus:border-pink-500/50 placeholder:text-slate-500"
           />
           <button
             type="submit"
@@ -119,14 +122,14 @@ export default function BanksPage() {
         </form>
       )}
 
-      {error && <p className="mb-4 text-sm text-[#FF5A4E]">{error}</p>}
+      {error && <p className="mb-4 text-sm text-danger">{error}</p>}
 
       <input ref={fileRef} type="file" accept=".csv,.xlsx,.xls" className="hidden" onChange={handleFileChange} />
 
       {loading ? (
         <p className="text-sm text-slate-500">Loading…</p>
       ) : banks.length === 0 ? (
-        <div className="rounded-2xl border border-pink-500/15 bg-[#141B2E]/85 p-10 text-center">
+        <div className="rounded-2xl border border-pink-500/15 bg-panel/85 p-10 text-center">
           <BookOpen size={28} className="mx-auto mb-3 text-slate-600" />
           <p className="text-sm text-slate-400">No question banks yet.</p>
           <p className="mt-1 text-xs text-slate-600">Create one and upload a CSV or Excel file.</p>
@@ -134,22 +137,22 @@ export default function BanksPage() {
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {banks.map((bank) => (
-            <div key={bank._id} className="animate-fade-in-up rounded-2xl border border-pink-500/15 bg-[#141B2E]/85 p-5">
+            <div key={bank._id} className="animate-fade-in-up rounded-2xl border border-pink-500/15 bg-panel/85 p-5">
               <div className="mb-3 flex items-start justify-between gap-3">
                 <div>
-                  <h2 className="font-['Orbitron'] text-[0.95rem] tracking-[-0.03em] text-[#EDEFF5]">{bank.name}</h2>
+                  <h2 className="font-orbitron text-[0.95rem] tracking-[-0.03em] text-text">{bank.name}</h2>
                   <p className="mt-1 text-xs text-slate-400">
                     {bank.questionCount} question{bank.questionCount !== 1 ? 's' : ''}
                     {bank.categories?.length > 0 && ` · ${bank.categories.slice(0, 2).join(', ')}${bank.categories.length > 2 ? '…' : ''}`}
                   </p>
                 </div>
-                <button type="button" onClick={() => handleDelete(bank._id)} className="text-slate-600 transition hover:text-[#FF5A4E]">
+                <button type="button" onClick={() => handleDelete(bank._id)} className="text-slate-600 transition hover:text-danger">
                   <Trash2 size={15} />
                 </button>
               </div>
 
               {uploadMsg[bank._id] && (
-                <p className={`mb-3 text-xs ${uploadMsg[bank._id].ok ? 'text-lime-400' : 'text-[#FF5A4E]'}`}>
+                <p className={`mb-3 text-xs ${uploadMsg[bank._id].ok ? 'text-lime-400' : 'text-danger'}`}>
                   {uploadMsg[bank._id].msg}
                 </p>
               )}
@@ -159,7 +162,7 @@ export default function BanksPage() {
                   type="button"
                   onClick={() => triggerUpload(bank._id)}
                   disabled={uploadingId === bank._id}
-                  className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-pink-500/20 bg-pink-500/8 py-2 text-xs font-medium text-[#EDEFF5] transition hover:bg-pink-500/15 disabled:opacity-60"
+                  className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-pink-500/20 bg-pink-500/8 py-2 text-xs font-medium text-text transition hover:bg-pink-500/15 disabled:opacity-60"
                 >
                   <Upload size={13} />
                   {uploadingId === bank._id ? 'Uploading…' : 'Upload CSV / Excel'}
@@ -176,9 +179,9 @@ export default function BanksPage() {
         </div>
       )}
 
-      <div className="mt-8 rounded-2xl border border-pink-500/10 bg-[#141B2E]/40 p-5">
+      <div className="mt-8 rounded-2xl border border-pink-500/10 bg-panel/40 p-5">
         <p className="mb-2 text-xs font-bold uppercase tracking-widest text-slate-400">CSV / Excel format</p>
-        <code className="block overflow-x-auto rounded-xl bg-[#0B0F1A] px-4 py-3 text-[0.7rem] text-slate-300">
+        <code className="block overflow-x-auto rounded-xl bg-void px-4 py-3 text-[0.7rem] text-slate-300">
           question,optionA,optionB,optionC,optionD,correctAnswer,category,difficulty{'\n'}
           What is 2+2?,3,4,5,6,B,Mathematics,Easy{'\n'}
           Capital of Nepal?,Pokhara,Kathmandu,Dharan,Butwal,B,General Knowledge,Easy

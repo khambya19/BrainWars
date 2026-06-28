@@ -19,19 +19,12 @@ export default function AuthLayout({ children, mode }) {
 
   return (
     <div
-      className="relative min-h-screen bg-[#0B0F1A] text-[#EDEFF5]"
-      style={{
-        backgroundImage:
-          'radial-gradient(circle at 20% 20%, rgba(255,61,129,0.12), transparent 45%), radial-gradient(circle at 80% 80%, rgba(198,255,61,0.06), transparent 40%)',
-      }}
+      className="relative min-h-screen bg-void bg-gradient-auth text-text"
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none fixed inset-0 opacity-[0.15]"
+        className="bg-grid pointer-events-none fixed inset-0 opacity-[0.15]"
         style={{
-          backgroundImage:
-            'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)',
-          backgroundSize: '28px 28px',
           maskImage: 'linear-gradient(180deg,rgba(0,0,0,0.9),transparent 100%)',
           WebkitMaskImage: 'linear-gradient(180deg,rgba(0,0,0,0.9),transparent 100%)',
         }}
@@ -39,18 +32,17 @@ export default function AuthLayout({ children, mode }) {
 
       <div className="relative z-10 flex min-h-screen flex-col">
 
-        {/* ── Navbar ── */}
-        <header className="shrink-0 border-b border-pink-500/12 bg-[#0B0F1A]/80 backdrop-blur-md">
+        <header className="shrink-0 border-b border-pink-500/12 bg-void/80 backdrop-blur-md">
           <div className="mx-auto flex w-full max-w-295 items-center justify-between gap-4 px-4 py-3 sm:px-6">
             <Link
               to="/"
               className="inline-flex items-center gap-3 transition duration-150 ease-out hover:opacity-80"
             >
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-pink-500/35 bg-pink-500/10 font-['Orbitron'] text-sm tracking-[0.06em]">
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-pink-500/35 bg-pink-500/10 font-orbitron text-sm tracking-[0.06em]">
                 BW
               </span>
               <span className="grid gap-0.5">
-                <strong className="font-['Orbitron'] text-[0.95rem] leading-none tracking-[-0.04em]">
+                <strong className="font-orbitron text-[0.95rem] leading-none tracking-[-0.04em]">
                   BrainWars
                 </strong>
                 <span className="hidden text-xs text-slate-400 sm:block">Live quiz arena</span>
@@ -72,18 +64,17 @@ export default function AuthLayout({ children, mode }) {
           </div>
         </header>
 
-        {/* ── Body: same max-w-295 constraint as navbar ── */}
         <div className="mx-auto flex w-full max-w-295 flex-1 flex-col lg:flex-row">
 
           {/* Left branding panel */}
-          <aside className="hidden shrink-0 lg:flex lg:w-96 xl:w-110 flex-col border-r border-pink-500/12 bg-[#0d1220]/60">
+          <aside className="hidden shrink-0 lg:flex lg:w-96 xl:w-110 flex-col border-r border-pink-500/12 bg-sidebar/60">
             <div className="sticky top-0 flex h-screen flex-col px-6 py-12 xl:px-8">
               <div className="flex flex-1 flex-col justify-center gap-8">
                 <div className="grid gap-3">
                   <p className="text-xs font-bold uppercase tracking-[0.18em] text-pink-400">
                     Live quiz battles
                   </p>
-                  <h2 className="font-['Orbitron'] text-[1.9rem] leading-[1.05] tracking-[-0.04em] text-[#EDEFF5] xl:text-[2.2rem]">
+                  <h2 className="font-orbitron text-[1.9rem] leading-[1.05] tracking-[-0.04em] text-text xl:text-[2.2rem]">
                     Quiz faster.<br />Score higher.<br />Win live.
                   </h2>
                   <p className="max-w-[32ch] text-sm leading-7 text-slate-400">

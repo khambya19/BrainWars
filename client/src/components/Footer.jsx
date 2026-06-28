@@ -1,4 +1,4 @@
-import { Mail, MessageCircle, X } from 'lucide-react'
+import { Mail } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 const productLinks = [
@@ -9,10 +9,7 @@ const productLinks = [
 ]
 
 const communityLinks = [
-  { label: 'Discord server', href: 'https://discord.com' },
-  { label: 'X / Twitter',    href: 'https://x.com'       },
-  { label: 'Leaderboard',    href: '#'                    },
-  { label: 'Hall of fame',   href: '#'                    },
+  { label: 'Leaderboard', href: '/dashboard/leaderboard', internal: true },
 ]
 
 const companyLinks = [
@@ -22,15 +19,13 @@ const companyLinks = [
 ]
 
 const socialLinks = [
-  { label: 'X / Twitter', href: 'https://x.com',             icon: X             },
-  { label: 'Discord',     href: 'https://discord.com',        icon: MessageCircle },
-  { label: 'Email',       href: 'mailto:hello@brainwars.gg',  icon: Mail          },
+  { label: 'Email', href: 'mailto:hello@brainwars.gg', icon: Mail },
 ]
 
 function FooterColumn({ heading, links }) {
   return (
     <div className="grid gap-3">
-      <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#EDEFF5]">{heading}</p>
+      <p className="text-xs font-bold uppercase tracking-[0.16em] text-text">{heading}</p>
       <ul className="grid gap-2.5">
         {links.map((link) => (
           <li key={link.label}>
@@ -62,7 +57,7 @@ export default function Footer() {
       <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div className="grid gap-5 content-start">
           <div>
-            <p className="font-['Orbitron'] text-[1.05rem] leading-none tracking-[-0.04em] text-[#EDEFF5]">
+            <p className="font-orbitron text-[1.05rem] leading-none tracking-[-0.04em] text-text">
               BrainWars
             </p>
             <p className="mt-2 max-w-[28ch] text-sm leading-6 text-slate-400">
@@ -75,7 +70,7 @@ export default function Footer() {
                 key={label}
                 href={href}
                 aria-label={label}
-                className="grid h-9 w-9 place-items-center rounded-full border border-pink-500/16 bg-[#141B2E] text-slate-400 transition duration-150 ease-out hover:-translate-y-px hover:border-pink-500/40 hover:text-pink-400"
+                className="grid h-9 w-9 place-items-center rounded-full border border-pink-500/16 bg-panel text-slate-400 transition duration-150 ease-out hover:-translate-y-px hover:border-pink-500/40 hover:text-pink-400"
               >
                 <Icon size={16} aria-hidden="true" />
               </a>

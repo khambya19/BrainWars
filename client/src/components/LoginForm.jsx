@@ -94,7 +94,7 @@ export default function LoginForm({ onSuccess, onForgotPassword, defaultEmail = 
       </div>
 
       {serverError ? (
-        <p className="text-sm text-[#FF5A4E]" role="alert">{serverError}</p>
+        <p className="text-sm text-danger" role="alert">{serverError}</p>
       ) : null}
 
       <Button type="submit" variant="primary" className="w-full" disabled={loading}>

@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken')
+const env = require('../config/env')
 
 function authenticate(request, response, next) {
   const authorization = request.headers.authorization || ''
@@ -10,7 +11,7 @@ function authenticate(request, response, next) {
   const token = authorization.slice(7).trim()
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+    const decoded = jwt.verify(token, env.JWT_SECRET)
     request.playerId = decoded.playerId
     next()
   } catch (error) {

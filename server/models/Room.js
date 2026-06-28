@@ -2,13 +2,15 @@ const mongoose = require('mongoose')
 
 const playerSlotSchema = new mongoose.Schema(
   {
-    playerId:  { type: mongoose.Schema.Types.ObjectId, ref: 'Player', required: true },
-    name:      { type: String, required: true },
-    socketId:  { type: String, required: true },
-    score:     { type: Number, default: 0 },
-    hp:        { type: Number, default: 100 },
-    streak:    { type: Number, default: 0 },
-    answered:  { type: Boolean, default: false },
+    playerId:   { type: mongoose.Schema.Types.ObjectId, ref: 'Player', required: true },
+    name:       { type: String, required: true },
+    socketId:   { type: String, required: true },
+    score:      { type: Number, default: 0 },
+    hp:         { type: Number, default: 100 },
+    streak:     { type: Number, default: 0 },
+    maxStreak:  { type: Number, default: 0 },
+    answered:   { type: Boolean, default: false },
+    eliminated: { type: Boolean, default: false },
   },
   { _id: false },
 )
@@ -24,6 +26,7 @@ const roomSchema = new mongoose.Schema(
     questions:            [{ type: mongoose.Schema.Types.ObjectId, ref: 'Question' }],
     currentQuestionIndex: { type: Number, default: -1 },
     status:               { type: String, enum: ['waiting', 'playing', 'finished'], default: 'waiting' },
+    finishedAt:           { type: Date, default: null },
     settings: {
       categories:       { type: [String], default: [] },
       difficulty:       { type: String, default: 'Mixed' },
@@ -35,5 +38,7 @@ const roomSchema = new mongoose.Schema(
 )
 
 roomSchema.index({ status: 1, isPublic: 1 })
+// Auto-delete finished rooms 30 days after they ended (sparse so waiting/playing rooms are unaffected)
+roomSchema.index({ finishedAt: 1 }, { expireAfterSeconds: 30 * 24 * 60 * 60, sparse: true })
 
 module.exports = mongoose.model('Room', roomSchema)

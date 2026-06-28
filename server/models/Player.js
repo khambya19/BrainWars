@@ -21,6 +21,20 @@ const playerSchema = new mongoose.Schema(
       required: [true, 'Password is required'],
       select: false,
     },
+    stats: {
+      gamesPlayed: { type: Number, default: 0 },
+      bestStreak:  { type: Number, default: 0 },
+      totalScore:  { type: Number, default: 0 },
+    },
+    trophies: {
+      type:    Number,
+      default: 0,
+      min:     0,
+    },
+    customTitle:         { type: String, maxlength: 24, default: null, trim: true },
+    resetToken:          { type: String, select: false },
+    resetTokenExpiry:    { type: Date,   select: false },
+    lastDailyBonusDate:  { type: Date,   default: null },
   },
   {
     timestamps: true,

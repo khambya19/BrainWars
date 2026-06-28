@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { Heart, Zap } from 'lucide-react'
+import { Heart, Skull, Zap } from 'lucide-react'
 
 export default function GameLeaderboard({ leaderboard = [], myPlayerId }) {
-  const [prevRanks, setPrevRanks]     = useState({})
-  const [movers, setMovers]           = useState({})
-  const prevBoardRef                  = useRef([])
+  const [movers, setMovers]   = useState({})
+  const prevBoardRef          = useRef([])
 
   useEffect(() => {
     const prev = {}
@@ -19,56 +18,62 @@ export default function GameLeaderboard({ leaderboard = [], myPlayerId }) {
       }
     })
 
-    setPrevRanks(prev)
     setMovers(moved)
     prevBoardRef.current = leaderboard
   }, [leaderboard])
 
   return (
-    <div className="rounded-2xl border border-pink-500/15 bg-[#141B2E]/85 overflow-hidden">
+    <div className="overflow-hidden rounded-2xl border border-pink-500/15 bg-panel/85">
       <div className="border-b border-pink-500/10 px-4 py-3">
-        <h3 className="font-['Orbitron'] text-[0.8rem] tracking-[-0.02em] text-[#EDEFF5]">
+        <h3 className="font-orbitron text-[0.8rem] tracking-[-0.02em] text-text">
           Live Leaderboard
         </h3>
       </div>
 
       <ul className="divide-y divide-pink-500/8">
         {leaderboard.map((player, i) => {
-          const isMe   = player.playerId === myPlayerId
-          const mover  = movers[player.playerId]
+          const isMe       = player.playerId === myPlayerId
+          const mover      = movers[player.playerId]
+          const eliminated = player.eliminated ?? false
 
           return (
             <li
               key={player.playerId}
               className={`flex items-center gap-3 px-4 py-3 transition-all duration-500 ${
-                isMe ? 'bg-pink-500/8' : ''
+                eliminated ? 'opacity-40' : isMe ? 'bg-pink-500/8' : ''
               }`}
             >
-              <span className={`w-5 text-center font-['JetBrains_Mono'] text-sm ${
-                i === 0 ? 'text-amber-400' : i === 1 ? 'text-slate-300' : i === 2 ? 'text-amber-600' : 'text-slate-500'
+              <span className={`w-5 text-center font-data text-sm ${
+                eliminated
+                  ? 'text-slate-600'
+                  : i === 0 ? 'text-amber-400' : i === 1 ? 'text-slate-300' : i === 2 ? 'text-amber-600' : 'text-slate-500'
               }`}>
-                {i + 1}
+                {eliminated ? <Skull size={12} className="mx-auto" aria-label="Eliminated" /> : i + 1}
               </span>
 
-              <span className="flex-1 truncate text-sm text-[#EDEFF5]">
+              <span className={`flex-1 truncate text-sm ${eliminated ? 'text-slate-500 line-through' : 'text-text'}`}>
                 {player.name}{isMe ? ' (you)' : ''}
               </span>
 
-              {mover === 'up' && (
+              {!eliminated && mover === 'up' && (
                 <span className="animate-fade-in text-xs text-lime-400">↑</span>
               )}
-              {mover === 'down' && (
+              {!eliminated && mover === 'down' && (
                 <span className="animate-fade-in text-xs text-red-400">↓</span>
               )}
 
-              <div className="flex items-center gap-1 text-xs text-slate-400">
-                <Heart size={11} className="text-pink-400" />
-                <span>{player.hp}</span>
-              </div>
+              {eliminated ? (
+                <span className="text-[0.6rem] uppercase tracking-widest text-danger/60">out</span>
+              ) : (
+                <div className="flex items-center gap-1 text-xs text-slate-400">
+                  <Heart size={11} className="text-pink-400" />
+                  <span>{player.hp}</span>
+                </div>
+              )}
 
               <div className="flex items-center gap-1">
                 <Zap size={11} className="text-amber-400" />
-                <span className="font-['JetBrains_Mono'] text-sm text-[#EDEFF5]">
+                <span className={`font-data text-sm ${eliminated ? 'text-slate-600' : 'text-text'}`}>
                   {player.score}
                 </span>
               </div>

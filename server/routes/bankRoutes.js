@@ -137,7 +137,6 @@ function parseFile(buffer, filename) {
   return XLSX.utils.sheet_to_json(sheet, { defval: '' })
 }
 
-// ── GET all banks for logged-in host ─────────────────────────────────────────
 router.get('/', authenticate, async (req, res) => {
   try {
     const banks = await QuestionBank.find({ host: req.playerId }).sort({ createdAt: -1 })
@@ -147,7 +146,6 @@ router.get('/', authenticate, async (req, res) => {
   }
 })
 
-// ── CREATE bank ───────────────────────────────────────────────────────────────
 router.post('/', authenticate, async (req, res) => {
   try {
     const { name, description, isPublic } = req.body
@@ -165,7 +163,6 @@ router.post('/', authenticate, async (req, res) => {
   }
 })
 
-// ── GET single bank + questions ───────────────────────────────────────────────
 router.get('/:id', authenticate, async (req, res) => {
   try {
     const bank = await QuestionBank.findOne({ _id: req.params.id, host: req.playerId })
@@ -178,7 +175,6 @@ router.get('/:id', authenticate, async (req, res) => {
   }
 })
 
-// ── DELETE bank + all its questions ──────────────────────────────────────────
 router.delete('/:id', authenticate, async (req, res) => {
   try {
     const bank = await QuestionBank.findOneAndDelete({ _id: req.params.id, host: req.playerId })
@@ -191,7 +187,6 @@ router.delete('/:id', authenticate, async (req, res) => {
   }
 })
 
-// ── DELETE single question from bank ─────────────────────────────────────────
 router.delete('/:id/questions/:qid', authenticate, async (req, res) => {
   try {
     const bank = await QuestionBank.findOne({ _id: req.params.id, host: req.playerId })
@@ -205,7 +200,6 @@ router.delete('/:id/questions/:qid', authenticate, async (req, res) => {
   }
 })
 
-// ── UPLOAD CSV / Excel ────────────────────────────────────────────────────────
 router.post('/:id/upload', authenticate, upload.single('file'), async (req, res) => {
   try {
     const bank = await QuestionBank.findOne({ _id: req.params.id, host: req.playerId })

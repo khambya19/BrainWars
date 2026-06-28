@@ -20,7 +20,8 @@ router.get('/public', authenticate, async (req, res) => {
       settings:      r.settings,
       createdAt:     r.createdAt,
     })))
-  } catch {
+  } catch (err) {
+    console.error('[BrainWars/roomRoutes] Failed to fetch public rooms:', err)
     res.status(500).json({ message: 'Could not fetch public rooms.' })
   }
 })

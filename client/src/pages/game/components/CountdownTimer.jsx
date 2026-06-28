@@ -1,13 +1,22 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { playSound } from '../../../utils/sounds.js'
 
 export default function CountdownTimer({ startTime, timeLimit, onExpire }) {
   const [remaining, setRemaining] = useState(timeLimit)
+  const lastSecond = useRef(null)
 
   useEffect(() => {
     const tick = () => {
       const elapsed = (Date.now() - startTime) / 1000
       const left    = Math.max(0, timeLimit - elapsed)
       setRemaining(left)
+
+      const currentSecond = Math.ceil(left)
+      if (left > 0 && currentSecond !== lastSecond.current) {
+        lastSecond.current = currentSecond
+        playSound('tick')
+      }
+
       if (left <= 0) onExpire?.()
     }
 
@@ -38,7 +47,7 @@ export default function CountdownTimer({ startTime, timeLimit, onExpire }) {
         />
       </svg>
       <span
-        className="absolute font-['JetBrains_Mono'] text-xl font-bold"
+        className="absolute font-data text-xl font-bold"
         style={{ color }}
       >
         {Math.ceil(remaining)}

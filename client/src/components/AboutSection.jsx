@@ -36,7 +36,7 @@ export default function AboutSection() {
     <section className="py-10 md:py-14" id="about">
       <div className="animate-fade-in-up mb-8 md:mb-10">
         <p className="mb-2 text-sm font-bold uppercase tracking-[0.18em] text-pink-400">What is BrainWars?</p>
-        <h2 className="font-['Orbitron'] text-[clamp(2rem,5vw,3.4rem)] leading-none tracking-[-0.04em] text-[#EDEFF5]">
+        <h2 className="font-orbitron text-[clamp(2rem,5vw,3.4rem)] leading-none tracking-[-0.04em] text-text">
           A live multiplayer quiz arena for everyone.
         </h2>
         <p className="mt-4 max-w-[66ch] leading-7 text-slate-400">
@@ -51,14 +51,14 @@ export default function AboutSection() {
           return (
             <article
               key={feature.title}
-              className={`animate-fade-in-up grid gap-4 rounded-2xl border border-pink-500/15 bg-[#141B2E]/85 p-5 transition duration-200 hover:-translate-y-1 hover:bg-[#141B2E] ${feature.border}`}
+              className={`animate-fade-in-up grid gap-4 rounded-2xl border border-pink-500/15 bg-panel/85 p-5 transition duration-200 hover:-translate-y-1 hover:bg-panel ${feature.border}`}
               style={{ animationDelay: `${i * 100}ms` }}
             >
-              <div className={`grid h-10 w-10 place-items-center rounded-xl border border-pink-500/15 bg-[#0B0F1A] ${feature.accent}`}>
+              <div className={`grid h-10 w-10 place-items-center rounded-xl border border-pink-500/15 bg-void ${feature.accent}`}>
                 <Icon size={18} aria-hidden="true" />
               </div>
               <div>
-                <h3 className="font-['Orbitron'] text-[1.05rem] leading-snug tracking-[-0.03em] text-[#EDEFF5]">
+                <h3 className="font-orbitron text-[1.05rem] leading-snug tracking-[-0.03em] text-text">
                   {feature.title}
                 </h3>
                 <p className="mt-2 text-sm leading-6 text-slate-400">{feature.copy}</p>

@@ -2,12 +2,12 @@ import { Hash } from 'lucide-react'
 
 export default function JoinRoomCard() {
   return (
-    <div className="animate-fade-in-up rounded-2xl border border-pink-500/15 bg-[#141B2E]/85 p-6" style={{ animationDelay: '200ms' }}>
+    <div className="animate-fade-in-up rounded-2xl border border-pink-500/15 bg-panel/85 p-6 delay-200">
       <div className="mb-4 flex items-start justify-between gap-3">
         <div>
           <div className="mb-1 flex items-center gap-2 text-pink-400">
             <Hash size={16} aria-hidden="true" />
-            <h2 className="font-['Orbitron'] text-[0.95rem] tracking-[-0.03em] text-[#EDEFF5]">
+            <h2 className="font-orbitron text-[0.95rem] tracking-[-0.03em] text-text">
               Join a room
             </h2>
           </div>
@@ -23,7 +23,7 @@ export default function JoinRoomCard() {
           disabled
           placeholder="e.g. AB12"
           maxLength={4}
-          className="min-h-11 flex-1 cursor-not-allowed rounded-xl border border-pink-500/12 bg-[#0B0F1A]/60 px-4 font-['JetBrains_Mono'] text-sm uppercase tracking-widest text-slate-500 placeholder:text-slate-600 outline-none"
+          className="min-h-11 flex-1 cursor-not-allowed rounded-xl border border-pink-500/12 bg-void/60 px-4 font-data text-sm uppercase tracking-widest text-slate-500 placeholder:text-slate-600 outline-none"
         />
         <button
           disabled

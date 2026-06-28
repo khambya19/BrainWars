@@ -29,7 +29,11 @@ export default function Hero() {
         setLeaderboard(data.leaderboard ?? [])
         setLiveRoom(data.liveRoom ?? null)
       })
-      .catch(() => {})
+      .catch((err) => {
+        if (err?.name !== 'AbortError') {
+          console.error('[BrainWars/Hero] Failed to fetch live stats:', err)
+        }
+      })
 
     return () => controller.abort()
   }, [])
@@ -41,28 +45,25 @@ export default function Hero() {
           Live quiz battles
         </p>
         <h1
-          className="animate-fade-in-up max-w-[11ch] font-['Orbitron'] text-[clamp(2.75rem,9vw,5.8rem)] leading-[0.94] tracking-[-0.04em] text-[#EDEFF5]"
-          style={{ animationDelay: '100ms' }}
+          className="animate-fade-in-up max-w-[11ch] font-orbitron text-[clamp(2.75rem,9vw,5.8rem)] leading-[0.94] tracking-[-0.04em] text-text delay-100"
         >
           Quiz tournaments with HP, speed, and a live scoreboard.
         </h1>
         <p
-          className="animate-fade-in-up max-w-[58ch] text-[1.02rem] leading-7 text-slate-400"
-          style={{ animationDelay: '200ms' }}
+          className="animate-fade-in-up max-w-[58ch] text-[1.02rem] leading-7 text-slate-400 delay-200"
         >
           BrainWars turns every question into a real-time duel for lobbies of up to a hundred
           players, with score pressure that feels like an esports broadcast.
         </p>
 
         <div
-          className="animate-fade-in-up mt-2 flex flex-wrap items-center gap-3"
-          style={{ animationDelay: '300ms' }}
+          className="animate-fade-in-up mt-2 flex flex-wrap items-center gap-3 delay-300"
         >
           <Link to="/register">
             <Button variant="primary">Play Now</Button>
           </Link>
           <a
-            className="inline-flex min-h-11 items-center px-1 text-[#EDEFF5] transition duration-150 ease-out hover:-translate-y-px hover:text-pink-400"
+            className="inline-flex min-h-11 items-center px-1 text-text transition duration-150 ease-out hover:-translate-y-px hover:text-pink-400"
             href="#about"
           >
             See how it works
@@ -73,11 +74,11 @@ export default function Hero() {
           {stats.map((stat, i) => (
             <article
               key={stat.label}
-              className="animate-fade-in-up rounded-2xl border border-pink-500/15 bg-[#141B2E]/85 p-4 transition duration-200 hover:-translate-y-0.5 hover:border-pink-500/30"
+              className="animate-fade-in-up rounded-2xl border border-pink-500/15 bg-panel/85 p-4 transition duration-200 hover:-translate-y-0.5 hover:border-pink-500/30"
               style={{ animationDelay: `${400 + i * 100}ms` }}
             >
               <span className="mb-2 block text-sm text-slate-400">{stat.label}</span>
-              <strong className="font-['JetBrains_Mono'] text-[1.4rem] text-[#EDEFF5] drop-shadow-[0_0_14px_rgba(255,61,129,0.2)]">
+              <strong className="font-data text-[1.4rem] text-text drop-shadow-[0_0_14px_rgba(255,61,129,0.2)]">
                 {stat.value}
               </strong>
             </article>
@@ -87,24 +88,23 @@ export default function Hero() {
 
       <div
         className="animate-fade-in-right animate-float grid"
-        style={{ animationDelay: '200ms' }}
         aria-label="Live tournament preview"
       >
-        <div className="rounded-3xl border border-pink-500/18 bg-[#141B2E]/88 p-5 shadow-[0_0_0_1px_rgba(255,61,129,0.1)]">
+        <div className="rounded-3xl border border-pink-500/18 bg-panel/88 p-5 shadow-[0_0_0_1px_rgba(255,61,129,0.1)]">
           <div className="flex items-start justify-between gap-3">
             <div>
               <p className="text-xs uppercase tracking-[0.18em] text-slate-400">Tournament room</p>
-              <h2 className="mt-1 font-['Orbitron'] text-[clamp(2.4rem,8vw,4rem)] leading-none tracking-[-0.04em] text-[#EDEFF5]">
+              <h2 className="mt-1 font-orbitron text-[clamp(2.4rem,8vw,4rem)] leading-none tracking-[-0.04em] text-text">
                 {liveRoom ?? '—'}
               </h2>
             </div>
             {liveRoom ? (
-              <span className="inline-flex min-h-8 items-center gap-2 rounded-full border border-pink-500/30 bg-pink-500/12 px-3 text-[0.78rem] font-['JetBrains_Mono'] tracking-[0.12em] text-[#EDEFF5]">
+              <span className="inline-flex min-h-8 items-center gap-2 rounded-full border border-pink-500/30 bg-pink-500/12 px-3 text-[0.78rem] font-data tracking-[0.12em] text-text">
                 <span className="animate-pulse-dot h-2 w-2 rounded-full bg-pink-400" />
                 LIVE
               </span>
             ) : (
-              <span className="inline-flex min-h-8 items-center rounded-full border border-white/10 bg-white/5 px-3 text-[0.78rem] font-['JetBrains_Mono'] tracking-[0.12em] text-slate-500">
+              <span className="inline-flex min-h-8 items-center rounded-full border border-white/10 bg-white/5 px-3 text-[0.78rem] font-data tracking-[0.12em] text-slate-500">
                 IDLE
               </span>
             )}
@@ -121,14 +121,14 @@ export default function Hero() {
                     key={`${player.name}-${index}`}
                     className="grid grid-cols-[auto_1fr_auto] items-center gap-3 border-b border-pink-500/8 py-3 last:border-b-0 last:pb-0"
                   >
-                    <div className="font-['JetBrains_Mono'] text-[1rem] text-[#EDEFF5] drop-shadow-[0_0_14px_rgba(255,61,129,0.2)]">
+                    <div className="font-data text-[1rem] text-text drop-shadow-[0_0_14px_rgba(255,61,129,0.2)]">
                       0{index + 1}
                     </div>
                     <div>
-                      <strong className="block text-[#EDEFF5]">{player.name}</strong>
+                      <strong className="block text-text">{player.name}</strong>
                       <p className="mt-0.5 text-sm text-slate-400">HP {player.hp}</p>
                     </div>
-                    <div className="font-['JetBrains_Mono'] text-[1rem] text-[#EDEFF5] drop-shadow-[0_0_14px_rgba(255,61,129,0.2)]">
+                    <div className="font-data text-[1rem] text-text drop-shadow-[0_0_14px_rgba(255,61,129,0.2)]">
                       {player.score}
                     </div>
                   </article>
