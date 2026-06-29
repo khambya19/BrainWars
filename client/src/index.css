@@ -107,7 +107,7 @@
   .animate-fade-in-right { animation: fade-in-right 0.65s cubic-bezier(0.16, 1, 0.3, 1) both; }
   .animate-scale-in      { animation: scale-in     0.45s cubic-bezier(0.16, 1, 0.3, 1) both; }
   .animate-pulse-dot     { animation: pulse-dot    1.8s  ease-in-out infinite; }
-  .animate-float         { animation: float        4s    ease-in-out infinite; }
+  .animate-float         { animation: float        3.5s  ease-in-out infinite; }
 
   /* Named animation delays */
   .delay-60  { animation-delay:  60ms; }
