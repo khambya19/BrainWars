@@ -4,6 +4,8 @@ import { useAuth } from '../../context/AuthContext.jsx'
 import LeagueBadge from '../../components/LeagueBadge.jsx'
 import TierProgressBar from '../../components/TierProgressBar.jsx'
 
+// This page shows the player profile details.
+
 function Skeleton({ className = '' }) {
   return <div className={`animate-pulse rounded-lg bg-white/6 ${className}`} />
 }

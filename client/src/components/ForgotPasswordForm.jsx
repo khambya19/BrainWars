@@ -5,6 +5,8 @@ import Button from './Button.jsx'
 import Input from './Input.jsx'
 import { parseResponse } from '../utils/api.js'
 
+// This component handles the forgot password form UI.
+
 export default function ForgotPasswordForm({ onBackToLogin }) {
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)

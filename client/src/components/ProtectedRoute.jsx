@@ -2,6 +2,8 @@ import { Navigate } from 'react-router-dom'
 
 import { useAuth } from '../context/AuthContext.jsx'
 
+// This component guards routes that require authentication.
+
 function LoadingScreen() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-void">

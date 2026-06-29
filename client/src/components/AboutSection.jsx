@@ -1,5 +1,7 @@
 import { BarChart3, Heart, LayoutGrid, Zap } from 'lucide-react'
 
+// This component highlights the project or platform overview section.
+
 const features = [
   {
     title: 'HP system',

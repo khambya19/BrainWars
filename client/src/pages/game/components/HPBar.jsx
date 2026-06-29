@@ -1,5 +1,7 @@
 import { Heart } from 'lucide-react'
 
+// This component visualizes player health during the game.
+
 export default function HPBar({ hp = 100 }) {
   const pct    = Math.max(0, Math.min(100, hp))
   const color  = pct > 60 ? '#c6ff3d' : pct > 30 ? '#f59e0b' : '#FF5A4E'

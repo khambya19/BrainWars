@@ -6,6 +6,8 @@ import CountdownTimer from '../components/CountdownTimer.jsx'
 import GameLeaderboard from '../components/GameLeaderboard.jsx'
 import HPBar from '../components/HPBar.jsx'
 
+// This state view renders the active question round.
+
 const DIFFICULTY_STYLES = {
   easy:   { bar: 'bg-lime-400',   badge: 'border-lime-400/40 bg-lime-400/15 text-lime-400'     },
   medium: { bar: 'bg-amber-400',  badge: 'border-amber-400/40 bg-amber-400/15 text-amber-400'  },

@@ -4,6 +4,8 @@ import { useAuth } from '../../../context/AuthContext.jsx'
 import { apiFetch } from '../../../api/client.js'
 import StatCard from './StatCard.jsx'
 
+// This component lays out the dashboard stats grid.
+
 export default function StatsGrid() {
   const { player } = useAuth()
   const [totalPlayers, setTotalPlayers] = useState('—')

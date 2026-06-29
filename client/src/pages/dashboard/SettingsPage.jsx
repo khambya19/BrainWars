@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext.jsx'
 import { apiFetch } from '../../api/client.js'
 
+// This page renders the user settings view.
+
 function getPasswordStrength(pw) {
   if (!pw) return null
   let score = 0

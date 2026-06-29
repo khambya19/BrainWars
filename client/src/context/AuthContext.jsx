@@ -3,6 +3,8 @@ import { createContext, useCallback, useContext, useEffect, useState } from 'rea
 import { apiFetch } from '../api/client.js'
 import { clearSession, getToken, saveSession } from '../utils/auth.js'
 
+// This context provides authentication state and actions.
+
 const AuthContext = createContext(null)
 
 export function AuthProvider({ children }) {

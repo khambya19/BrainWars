@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 
 import Button from './Button.jsx'
 
+// This layout wraps authentication pages with shared structure.
+
 const highlights = [
   'HP system — wrong answers drain your health bar',
   'Speed scoring — fastest answer earns bonus points',

@@ -3,6 +3,8 @@ import { Outlet } from 'react-router-dom'
 import MobileNav from './MobileNav.jsx'
 import Sidebar from './Sidebar.jsx'
 
+// This layout organizes the shared dashboard shell.
+
 export default function DashboardLayout() {
   return (
     <div

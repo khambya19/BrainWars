@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 
+// This component displays a compact strip of stats.
+
 const INITIAL = [
   { value: '—', label: 'Players live'    },
   { value: '—', label: 'Matches played'  },

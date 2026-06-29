@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 
 import Button from './Button.jsx'
 
+// This component shows the homepage hero section.
+
 const EMPTY_STATS = [
   { label: 'Players live', value: '–' },
   { label: 'Avg response', value: '–' },

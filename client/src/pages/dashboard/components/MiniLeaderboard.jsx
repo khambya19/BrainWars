@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import { apiFetch } from '../../../api/client.js'
 import LeagueBadge from '../../../components/LeagueBadge.jsx'
 
+// This component shows a compact leaderboard card.
+
 export default function MiniLeaderboard() {
   const [players, setPlayers] = useState([])
   const [loading, setLoading] = useState(true)

@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from 'react'
 import { useAuth } from '../../../context/AuthContext.jsx'
 import { playSound } from '../../../utils/sounds.js'
 
+// This state view renders the pre-game lobby.
+
 export default function LobbyState({ room, isHost, onStart, onLeave }) {
   const { player } = useAuth()
   const [copied, setCopied] = useState(false)

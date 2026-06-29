@@ -7,6 +7,8 @@ import { useBanks } from '../../hooks/useBanks.js'
 import { parseResponse } from '../../utils/api.js'
 import { getToken } from '../../utils/auth.js'
 
+// This page shows the dashboard question banks view.
+
 export default function BanksPage() {
   const { banks, setBanks, loading, refresh: fetchBanks } = useBanks()
   const [creating, setCreating]     = useState(false)

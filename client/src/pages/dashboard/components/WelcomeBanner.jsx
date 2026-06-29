@@ -4,6 +4,8 @@ import clientEnv from '../../../config/env.js'
 import LeagueBadge from '../../../components/LeagueBadge.jsx'
 import TierProgressBar from '../../../components/TierProgressBar.jsx'
 
+// This component renders the dashboard welcome banner.
+
 function isBonusClaimedToday(lastDailyBonusDate) {
   if (!lastDailyBonusDate) return false
   return new Date(lastDailyBonusDate).toDateString() === new Date().toDateString()

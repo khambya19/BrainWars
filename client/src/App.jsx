@@ -18,6 +18,8 @@ import RegisterPage from './pages/RegisterPage.jsx'
 import ResetPasswordPage from './pages/ResetPasswordPage.jsx'
 import TermsPage from './pages/TermsPage.jsx'
 
+// This file wires the main app routes and shared providers.
+
 function ProtectedWithSocket() {
   return (
     <ProtectedRoute>

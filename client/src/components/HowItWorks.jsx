@@ -1,5 +1,7 @@
 import { Plus, Share2, Zap } from 'lucide-react'
 
+// This component explains how the product flow works.
+
 const steps = [
   {
     number: '01',

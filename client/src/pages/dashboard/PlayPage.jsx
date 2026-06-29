@@ -6,6 +6,8 @@ import { apiFetch } from '../../api/client.js'
 import { useBanks } from '../../hooks/useBanks.js'
 import { useGameSocketContext } from '../../context/GameSocketContext.jsx'
 
+// This page handles the dashboard play and room flow.
+
 const CATEGORIES = [
   'Mathematics', 'English', 'General Knowledge', 'Programming',
   'Science', 'History', 'Geography', 'Technology', 'Sports', 'Entertainment',

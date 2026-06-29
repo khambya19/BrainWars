@@ -5,6 +5,8 @@ import { playSound } from '../../../utils/sounds.js'
 import StreakPopup from '../../../components/StreakPopup.jsx'
 import GameLeaderboard from '../components/GameLeaderboard.jsx'
 
+// This state view reveals round results to players.
+
 export default function RevealState({ result, leaderboard }) {
   const { player }   = useAuth()
   const myResult     = result.results.find((r) => r.name === player?.name)

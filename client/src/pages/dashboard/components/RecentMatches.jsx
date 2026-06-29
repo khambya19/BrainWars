@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { AlertCircle, BarChart3 } from 'lucide-react'
 import { apiFetch } from '../../../api/client.js'
 
+// This component lists recent match activity.
+
 function formatDate(iso) {
   return new Date(iso).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
 }

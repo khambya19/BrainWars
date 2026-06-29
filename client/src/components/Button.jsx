@@ -1,3 +1,5 @@
+// This component renders a reusable styled button.
+
 const variantClassNames = {
   primary:
     'border border-pink-500/45 bg-pink-500 text-white shadow-[0_0_0_1px_rgba(255,61,129,0.14)] hover:-translate-y-0.5 hover:bg-pink-400',

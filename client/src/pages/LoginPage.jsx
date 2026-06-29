@@ -7,6 +7,8 @@ import ForgotPasswordForm from '../components/ForgotPasswordForm.jsx'
 import LoginForm from '../components/LoginForm.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
 
+// This page renders the login screen.
+
 export default function LoginPage() {
   const navigate = useNavigate()
   const { login } = useAuth()

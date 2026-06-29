@@ -1,5 +1,7 @@
 import { Plus, Settings } from 'lucide-react'
 
+// This component displays controls for hosting a room.
+
 const options = [
   { label: 'Categories', value: 'All' },
   { label: 'Difficulty', value: 'Mixed' },

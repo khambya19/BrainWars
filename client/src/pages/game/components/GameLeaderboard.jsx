@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { Heart, Skull, Zap } from 'lucide-react'
 
+// This component displays the in-game leaderboard.
+
 export default function GameLeaderboard({ leaderboard = [], myPlayerId }) {
   const [movers, setMovers]   = useState({})
   const prevBoardRef          = useRef([])

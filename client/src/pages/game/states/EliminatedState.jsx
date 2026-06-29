@@ -2,6 +2,8 @@ import { Skull } from 'lucide-react'
 import { useAuth } from '../../../context/AuthContext.jsx'
 import GameLeaderboard from '../components/GameLeaderboard.jsx'
 
+// This state view appears when a player is eliminated.
+
 export default function EliminatedState({ question, leaderboard }) {
   const { player } = useAuth()
 

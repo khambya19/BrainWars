@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom'
 
 import Button from './Button.jsx'
 
+// This component displays the main call-to-action section.
+
 export default function CTASection() {
   return (
     <section className="animate-fade-in-up relative my-6 overflow-hidden rounded-3xl border border-pink-500/20 bg-panel px-6 py-14 text-center md:py-20">

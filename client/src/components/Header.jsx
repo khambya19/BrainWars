@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom'
 import { useMute } from '../hooks/useMute.js'
 import Button from './Button.jsx'
 
+// This component renders the top navigation header.
+
 const navItems = [
   { label: 'Home',         id: 'home'         },
   { label: 'How it works', id: 'how-it-works'  },

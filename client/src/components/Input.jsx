@@ -1,6 +1,8 @@
 import { forwardRef, useId, useState } from 'react'
 import { Check, Eye, EyeOff, X } from 'lucide-react'
 
+// This component renders a reusable styled input field.
+
 const Input = forwardRef(function Input(
   { className = '', error, success, id, label, type = 'text', ...props },
   ref,

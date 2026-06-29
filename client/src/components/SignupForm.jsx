@@ -6,6 +6,8 @@ import Input from './Input.jsx'
 import { parseResponse } from '../utils/api.js'
 import { useFormValidation } from '../hooks/useFormValidation.js'
 
+// This component handles the signup form UI.
+
 const schema = z
   .object({
     name: z

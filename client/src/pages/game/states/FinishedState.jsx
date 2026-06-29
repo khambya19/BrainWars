@@ -7,6 +7,8 @@ import { playSound } from '../../../utils/sounds.js'
 import { rankColors, rankLabels } from '../../../utils/rankStyles.js'
 import { getTier } from '../../../utils/leagues.js'
 
+// This state view appears when the game has finished.
+
 export default function FinishedState({ finalLeaderboard, onPlayAgain, onLeave }) {
   const { player, refreshPlayer } = useAuth()
 

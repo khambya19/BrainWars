@@ -1,6 +1,8 @@
 import { Award, Crown, Medal, Shield, Trophy } from 'lucide-react'
 import { getTier } from '../utils/leagues.js'
 
+// This component displays a player league badge.
+
 const ICONS = { Crown, Trophy, Medal, Award, Shield }
 
 export default function LeagueBadge({ trophies = 0, showCount = false, size = 'sm' }) {

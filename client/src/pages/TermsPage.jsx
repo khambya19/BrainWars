@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 
+// This page displays the terms and conditions content.
+
 const sections = [
   {
     title: '1. Acceptance of Terms',

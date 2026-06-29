@@ -1,3 +1,5 @@
+// This component renders a single answer choice.
+
 export default function AnswerOption({ label, letter, onClick, disabled, status }) {
   const base = 'w-full rounded-2xl border px-5 py-4 text-left text-sm font-medium transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-signal/60 focus-visible:ring-offset-2 focus-visible:ring-offset-void flex items-center gap-3'
 

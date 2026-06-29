@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+// This component shows a streak-related popup message.
+
 // Milestones that trigger the popup. After 10, every multiple of 5.
 function isMilestone(streak) {
   if (streak === 3 || streak === 5 || streak === 8) return true

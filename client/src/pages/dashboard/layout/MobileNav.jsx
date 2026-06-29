@@ -2,6 +2,8 @@ import { BookOpen, LayoutDashboard, Swords, Trophy, User, Volume2, VolumeX } fro
 import { NavLink } from 'react-router-dom'
 import { useMute } from '../../../hooks/useMute.js'
 
+// This component renders dashboard navigation for mobile.
+
 const navItems = [
   { label: 'Home',    to: '/dashboard',            icon: LayoutDashboard, end: true },
   { label: 'Play',    to: '/dashboard/play',        icon: Swords                     },

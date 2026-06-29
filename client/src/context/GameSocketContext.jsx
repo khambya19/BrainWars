@@ -1,6 +1,8 @@
 import { createContext, useContext } from 'react'
 import { useGameSocket } from '../hooks/useGameSocket.js'
 
+// This context manages shared realtime game socket state.
+
 const GameSocketContext = createContext(null)
 
 export function GameSocketProvider({ children }) {

@@ -3,6 +3,8 @@ import { Hash, Zap } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { useGameSocketContext } from '../../../context/GameSocketContext.jsx'
 
+// This component provides a quick way to join a match.
+
 export default function QuickJoin() {
   const { game, joinRoom } = useGameSocketContext()
   const navigate = useNavigate()

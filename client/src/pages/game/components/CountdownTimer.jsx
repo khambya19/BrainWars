@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { playSound } from '../../../utils/sounds.js'
 
+// This component shows the active round countdown.
+
 export default function CountdownTimer({ startTime, timeLimit, onExpire }) {
   const [remaining, setRemaining] = useState(timeLimit)
   const lastSecond = useRef(null)

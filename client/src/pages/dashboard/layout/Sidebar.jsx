@@ -5,6 +5,8 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../context/AuthContext.jsx'
 import { useMute } from '../../../hooks/useMute.js'
 
+// This component renders the main dashboard sidebar.
+
 const navItems = [
   { label: 'Home',         to: '/dashboard',            icon: LayoutDashboard, end: true },
   { label: 'Play',         to: '/dashboard/play',        icon: Swords                     },

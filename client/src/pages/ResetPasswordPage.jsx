@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
+// This page handles password reset flow UI.
+
 function getPasswordStrength(pw) {
   if (!pw) return null
   let score = 0

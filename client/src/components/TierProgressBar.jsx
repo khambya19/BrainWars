@@ -1,6 +1,8 @@
 import { Award, Crown, Medal, Shield, Trophy } from 'lucide-react'
 import { getTier, getNextTier } from '../utils/leagues.js'
 
+// This component visualizes progress across tiers.
+
 const ICONS = { Crown, Trophy, Medal, Award, Shield }
 
 export default function TierProgressBar({ trophies = 0 }) {

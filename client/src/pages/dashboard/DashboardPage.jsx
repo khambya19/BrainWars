@@ -4,6 +4,8 @@ import RecentMatches from './components/RecentMatches.jsx'
 import StatsGrid from './components/StatsGrid.jsx'
 import WelcomeBanner from './components/WelcomeBanner.jsx'
 
+// This page renders the main dashboard overview.
+
 export default function DashboardPage() {
   return (
     <div>

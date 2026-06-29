@@ -5,6 +5,8 @@ import { apiFetch } from '../../api/client.js'
 import { rankColors } from '../../utils/rankStyles.js'
 import LeagueBadge from '../../components/LeagueBadge.jsx'
 
+// This page displays the dashboard leaderboard view.
+
 export default function LeaderboardPage() {
   const { player } = useAuth()
   const [players, setPlayers] = useState([])

@@ -1,3 +1,5 @@
+// This component renders one dashboard stat card.
+
 export default function StatCard({ label, value, icon: Icon, color, delay = 0 }) {
   return (
     <div

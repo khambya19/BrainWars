@@ -1,6 +1,8 @@
 import { Mail } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
+// This component renders the site footer content.
+
 const productLinks = [
   { label: 'Home',         href: '#home'         },
   { label: 'How it works', href: '#how-it-works'  },

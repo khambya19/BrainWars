@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 
+// This page displays the privacy policy content.
+
 const sections = [
   {
     title: '1. Information We Collect',

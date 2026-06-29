@@ -6,6 +6,8 @@ import Hero from '../components/Hero.jsx'
 import HowItWorks from '../components/HowItWorks.jsx'
 import StatsStrip from '../components/StatsStrip.jsx'
 
+// This page renders the public home experience.
+
 export default function Home() {
   return (
     <main

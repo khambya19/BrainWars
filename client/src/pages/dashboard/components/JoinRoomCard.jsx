@@ -1,5 +1,7 @@
 import { Hash } from 'lucide-react'
 
+// This component displays controls for joining a room.
+
 export default function JoinRoomCard() {
   return (
     <div className="animate-fade-in-up rounded-2xl border border-pink-500/15 bg-panel/85 p-6 delay-200">

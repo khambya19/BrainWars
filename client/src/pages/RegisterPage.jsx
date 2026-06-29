@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import AuthLayout from '../components/AuthLayout.jsx'
 import SignupForm from '../components/SignupForm.jsx'
 
+// This page renders the registration screen.
+
 export default function RegisterPage() {
   const navigate = useNavigate()
 

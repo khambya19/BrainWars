@@ -12,6 +12,8 @@ import LobbyState from './states/LobbyState.jsx'
 import QuestionState from './states/QuestionState.jsx'
 import RevealState from './states/RevealState.jsx'
 
+// This page coordinates the live game experience.
+
 export default function GamePage() {
   const navigate = useNavigate()
   const { player } = useAuth()

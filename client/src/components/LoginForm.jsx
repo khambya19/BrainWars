@@ -6,6 +6,8 @@ import Input from './Input.jsx'
 import { parseResponse } from '../utils/api.js'
 import { useFormValidation } from '../hooks/useFormValidation.js'
 
+// This component handles the login form UI.
+
 const schema = z.object({
   email: z
     .string()
