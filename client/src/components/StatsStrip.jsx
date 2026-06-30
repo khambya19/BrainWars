@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-// This component displays a compact strip of stats.
+import { apiFetch } from '../utils/api.js'
 
 const INITIAL = [
   { value: '—', label: 'Players live'    },
@@ -15,7 +15,7 @@ export default function StatsStrip() {
   useEffect(() => {
     const controller = new AbortController()
 
-    fetch('/api/stats', { signal: controller.signal })
+    apiFetch('/api/stats', { signal: controller.signal })
       .then((r) => r.json())
       .then((data) => {
         setStats([

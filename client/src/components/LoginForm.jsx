@@ -4,7 +4,7 @@ import { z } from 'zod'
 
 import Button from './Button.jsx'
 import Input from './Input.jsx'
-import { parseResponse } from '../utils/api.js'
+import { apiFetch, parseResponse } from '../utils/api.js'
 import { useFormValidation } from '../hooks/useFormValidation.js'
 
 // This component handles the login form UI.
@@ -48,9 +48,8 @@ export default function LoginForm({ onSuccess, onForgotPassword, defaultEmail = 
     setServerError('')
 
     try {
-      const response = await fetch('/api/auth/login', {
+      const response = await apiFetch('/api/auth/login', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values),
       })
       const payload = await parseResponse(response, 'Login failed. Please try again.')

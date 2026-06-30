@@ -3,7 +3,7 @@ import { z } from 'zod'
 
 import Button from './Button.jsx'
 import Input from './Input.jsx'
-import { parseResponse } from '../utils/api.js'
+import { apiFetch, parseResponse } from '../utils/api.js'
 import { useFormValidation } from '../hooks/useFormValidation.js'
 
 // This component handles the signup form UI.
@@ -81,9 +81,8 @@ export default function SignupForm({ onSuccess }) {
     setServerError('')
 
     try {
-      const response = await fetch('/api/auth/signup', {
+      const response = await apiFetch('/api/auth/signup', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: values.name,
           email: values.email,

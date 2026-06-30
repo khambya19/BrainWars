@@ -3,7 +3,7 @@ import { Mail } from 'lucide-react'
 
 import Button from './Button.jsx'
 import Input from './Input.jsx'
-import { parseResponse } from '../utils/api.js'
+import { apiFetch, parseResponse } from '../utils/api.js'
 
 // This component handles the forgot password form UI.
 
@@ -30,9 +30,8 @@ export default function ForgotPasswordForm({ onBackToLogin }) {
     setError('')
 
     try {
-      const response = await fetch('/api/auth/forgot-password', {
+      const response = await apiFetch('/api/auth/forgot-password', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
       })
       await parseResponse(response, 'Failed to send reset link.')

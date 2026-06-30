@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
-// This page handles password reset flow UI.
+import { apiFetch } from '../utils/api.js'
 
 function getPasswordStrength(pw) {
   if (!pw) return null
@@ -54,9 +54,8 @@ export default function ResetPasswordPage() {
 
     setSubmitting(true)
     try {
-      const res = await fetch(`/api/auth/reset-password/${token}`, {
+      const res = await apiFetch(`/api/auth/reset-password/${token}`, {
         method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
         body:    JSON.stringify({ password }),
       })
       const data = await res.json()

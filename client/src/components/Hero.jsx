@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import Button from './Button.jsx'
+import { apiFetch } from '../utils/api.js'
 
 // This component shows the homepage hero section.
 
@@ -20,7 +21,7 @@ export default function Hero() {
   useEffect(() => {
     const controller = new AbortController()
 
-    fetch('/api/stats', { signal: controller.signal })
+    apiFetch('/api/stats', { signal: controller.signal })
       .then((r) => r.json())
       .then((data) => {
         setStats([

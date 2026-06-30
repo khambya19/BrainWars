@@ -1,11 +1,10 @@
 import { BookOpen, Plus, Trash2, Upload } from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { apiFetch } from '../../api/client.js'
 import { useBanks } from '../../hooks/useBanks.js'
 import { parseResponse } from '../../utils/api.js'
-import { getToken } from '../../utils/auth.js'
 
 // This page shows the dashboard question banks view.
 
@@ -67,9 +66,8 @@ export default function BanksPage() {
     formData.append('file', file)
 
     try {
-      const r = await fetch(`/api/banks/${bankId}/upload`, {
+      const r = await apiFetch(`/api/banks/${bankId}/upload`, {
         method:  'POST',
-        headers: { Authorization: `Bearer ${getToken()}` },
         body:    formData,
       })
       const data = await r.json()

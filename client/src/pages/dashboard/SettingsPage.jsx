@@ -65,7 +65,7 @@ function StatusMessage({ status }) {
 }
 
 export default function SettingsPage() {
-  const { player, login, logout, refreshPlayer } = useAuth()
+  const { player, logout, refreshPlayer } = useAuth()
   const navigate = useNavigate()
 
   // Display name

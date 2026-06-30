@@ -1,4 +1,5 @@
-import { clearSession, getToken, saveSession } from '../utils/auth.js'
+import { clearSession, getToken } from '../utils/auth.js'
+import { apiFetch as requestApi } from '../utils/api.js'
 
 let isRefreshing = false
 let refreshQueue = [] // pending requests waiting for the new token
@@ -20,9 +21,8 @@ async function attemptRefresh() {
 
   isRefreshing = true
   try {
-    const res = await fetch('/api/auth/refresh', {
-      method:      'POST',
-      credentials: 'include', // send the httpOnly refresh cookie
+    const res = await requestApi('/api/auth/refresh', {
+      method: 'POST',
     })
     if (!res.ok) throw new Error('Refresh failed')
 
@@ -44,11 +44,9 @@ export async function apiFetch(path, options = {}) {
   const token = getToken()
 
   const makeRequest = (t) =>
-    fetch(path, {
+    requestApi(path, {
       ...options,
-      credentials: 'include',
       headers: {
-        'Content-Type': 'application/json',
         ...(t ? { Authorization: `Bearer ${t}` } : {}),
         ...options.headers,
       },
