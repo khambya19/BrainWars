@@ -1,3 +1,4 @@
+// Main dashboard view showing user stats and game options
 import MiniLeaderboard from './components/MiniLeaderboard.jsx'
 import QuickJoin from './components/QuickJoin.jsx'
 import RecentMatches from './components/RecentMatches.jsx'

@@ -1,3 +1,4 @@
+// Authentication context for managing user session and login state
 import { createContext, useCallback, useContext, useEffect, useState } from 'react'
 
 import { apiFetch } from '../api/client.js'

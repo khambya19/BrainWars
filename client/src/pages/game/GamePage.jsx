@@ -1,3 +1,4 @@
+// Real-time multiplayer game page with socket integration
 import { Volume2, VolumeX } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'

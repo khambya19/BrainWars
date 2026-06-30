@@ -1,3 +1,4 @@
+// Core routing configuration with authentication and game socket providers
 import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom'
 
 import ProtectedRoute from './components/ProtectedRoute.jsx'

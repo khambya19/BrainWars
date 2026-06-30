@@ -1,3 +1,4 @@
+// API response handler utility
 export async function parseResponse(response, fallbackMessage) {
   const payload = await response.json().catch(() => ({}))
   if (!response.ok) {

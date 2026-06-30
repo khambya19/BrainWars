@@ -1,3 +1,4 @@
+// Login form component with email and password validation
 import { useState } from 'react'
 import { z } from 'zod'
 
